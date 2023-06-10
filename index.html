@@ -12,24 +12,31 @@
       rel="stylesheet"
     />
     <link
-      rel="stylesheet"
+      rel="stylesheet" 
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
-    <script
+    <script 
       src="https://kit.fontawesome.com/d18d22a038.js"
       crossorigin="anonymous"
     ></script>
+   
   </head>
   <body>
+    <a href="" id="home"></a>
     <div class="navbar">
       <div class="navbar-container">
         <div class="logo-container">
+          <img
+            class="logo-image"
+            src="swc_project\SWC_logo.png"
+            alt="swc_logo"
+          />
           <h1 class="logo">Movies</h1>
         </div>
         <div class="menu-container">
           <ul class="menu-list">
-            <li class="menu-list-item active">
-              <a class="active" href="#home">Home</a>
+            <li class="menu-list-item">
+              <a class="menulistitema" href="#home">Home</a>
             </li>
             <li class="menu-list-item">Movies</li>
             <li class="menu-list-item">Series</li>
@@ -41,33 +48,28 @@
         <div class="profile-container">
           <img
             class="profile-picture"
-            src=""
-            alt="swc_logo"
+            src="sayan.png"
+            alt="profile_picture"
           />
           <div class="profile-text-container">
-            <span class="profile-text">&nbsp;&nbsp;Sayan</span>
-            <!-- <i class="fas fa-caret-down"></i> -->
-            <form action="POST">
-              <select name="profile" id="profile">
-                <option value="profile">Profile</option>
-                <option value="logout">Logout</option>
-              </select>
-            </form>
+            <span class="profile-text">Sayan
+            </span>
+            <i class="fas fa-caret-down"></i>
           </div>
           <div class="toggle">
-            <i class="fas fa-moon toggle-icon"></i>
             <i class="fas fa-sun toggle-icon"></i>
+            <i class="fas fa-moon toggle-icon"></i>
             <div class="toggle-ball"></div>
           </div>
         </div>
       </div>
     </div>
-    <a href="" id="home"></a>
+    
     <div class="container"></div>
     <div class="button">
       <button id="showMore">Show More</button>
     </div>
-    <hr />
+    <!-- <hr /> -->
     <footer>
       <div id="copyRight">
         <p>Copyright &copy; 2023 All Rights Reserved</p>
