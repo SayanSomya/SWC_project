@@ -48,7 +48,7 @@ function fetchData() {
         for (var j = 0; j < myLen; j++) {
           let movie = movies.results[j];
           container.innerHTML += `<div class="box">
-      <img class="movieimg"src="http://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="img" />
+      <img class="movieimg" src="http://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="img" />
   <div class="moviesDetails">
     <div class="leftDetails">
       <h5>${movie.original_title}</h5>
@@ -68,7 +68,7 @@ function fetchData() {
 
 const ball = document.querySelector(".toggle-ball");
 const items = document.querySelectorAll(
-  ".container,.leftDetails,.rightDetailsrating,.active,.movie-list-title,.navbar-container,.sidebar,.left-menu-icon,.toggle"
+  ".navbar-container,.menulistitema,.container,.button,.navbar-container,.toggle"
 );
 
 ball.addEventListener("click", () => {
@@ -77,4 +77,3 @@ ball.addEventListener("click", () => {
   });
   ball.classList.toggle("active");
 });
-
