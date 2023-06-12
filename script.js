@@ -1,32 +1,46 @@
 let btn = document.querySelector("body");
-let toggleMenu = document.querySelector(".toggle");
-toggleMenu.addEventListener("click", () => {
-  console.log("clicked");
-  let ul = document.querySelector(".bottomHeader");
-  ul.classList.toggle("show");
-  toggleMenu.classList.toggle("fa-xmark");
-  ul.classList.add("bg");
-});
-let tv = document.getElementById("tv");
-var container = document.getElementsByClassName("container");
-let url;
-let i = 1;
 let api_key = "04a03760452fdabea07d13c24071c6e3";
+// let toggleMenu = document.querySelector(".toggle");
+// toggleMenu.addEventListener("click", () => {
+//   console.log("clicked");
+//   let ul = document.querySelector(".bottomHeader");
+//   ul.classList.toggle("show");
+//   toggleMenu.classList.toggle("fa-xmark");
+//   ul.classList.add("bg");
+// });
+// let tv = document.getElementById("tv");
+// var container = document.getElementsByClassName("container");
+// let url;
+
+let i = 1;
+let condition;
+let searchurl = `https://api.themoviedb.org/3/search/movie?&api_key=04a03760452fdabea07d13c24071c6e3&page=${i}&query=`;
+apiurl = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${i}`;
+
+fetchData(apiurl);
+let more = document.querySelector("#showMore");
+more.addEventListener("click", () => showMore(condition));
+
+condition = "api";
 url = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${i}`;
 
-fetchData();
-let more = document.querySelector("#showMore");
-more.addEventListener("click", showMore);
+function showMore(x) {
+  if (x == "api") {
+    i++;
+    apiurl = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${i}`;
+    fetchData(apiurl);
+  }
+  if (x == "search") {
+    i++;
+    // let searchTerm = search.value;
+    searchurl = `https://api.themoviedb.org/3/search/movie?&api_key=04a03760452fdabea07d13c24071c6e3&page=${i}&query=`;
+    fetchData(searchurl + searchTerm);
+  }
 
-function showMore() {
-  i++;
-  url = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${i}`;
-
-  fetchData();
   console.log(i);
 }
 
-function fetchData() {
+function fetchData(url) {
   fetch(url)
     .then((response) => {
       if (!response.ok) {
@@ -45,6 +59,9 @@ function fetchData() {
       showMovies();
 
       function showMovies() {
+        if (i == 1) {
+          container.innerHTML = " ";
+        }
         for (var j = 0; j < myLen; j++) {
           let movie = movies.results[j];
           container.innerHTML += `<div class="box">
@@ -68,7 +85,7 @@ function fetchData() {
 
 const ball = document.querySelector(".toggle-ball");
 const items = document.querySelectorAll(
-  ".navbar-container,.menulistitema,.container,.button,.navbar-container,.toggle"
+  ".ullia,footer,.footertext,.navbar-container,.menulistitema,.container,.button,.navbar-container,.toggle"
 );
 
 ball.addEventListener("click", () => {
@@ -76,4 +93,25 @@ ball.addEventListener("click", () => {
     item.classList.toggle("active");
   });
   ball.classList.toggle("active");
+});
+ 
+let searchTerm;
+form.addEventListener("submit", (e) => {
+  i=1;
+  e.preventDefault();
+  searchTerm = search.value;
+  if (searchTerm) {
+      
+      condition="search";
+      i=1;
+      searchurl= `https://api.themoviedb.org/3/search/movie?&api_key=04a03760452fdabea07d13c24071c6e3&page=${i}&query=`;
+      fetchData(searchurl+searchTerm);
+    search.value = "";
+  }
+  if (!searchTerm){
+      condition="api"
+      i=1;
+      apiurl = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${i}`;
+      fetchData(apiurl);
+  }
 });
