@@ -1,445 +1,105 @@
-* {
-  margin: 0;
+let btn = document.querySelector("body");
+let api_key = "04a03760452fdabea07d13c24071c6e3";
+let i = 1;
+let condition;
+let searchurl = `https://api.themoviedb.org/3/search/movie?&api_key=04a03760452fdabea07d13c24071c6e3&page=${i}&query=`;
+apiurl = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${i}`;
+
+fetchData(apiurl);
+let more = document.querySelector("#showMore");
+more.addEventListener("click", () => showMore(condition));
+
+condition = "api";
+url = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${i}`;
+
+function showMore(x) {
+  if (x == "api") {
+    i++;
+    apiurl = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${i}`;
+    fetchData(apiurl);
+  }
+  if (x == "search") {
+    i++;
+    // let searchTerm = search.value;
+    searchurl = `https://api.themoviedb.org/3/search/movie?&api_key=04a03760452fdabea07d13c24071c6e3&page=${i}&query=`;
+    fetchData(searchurl + searchTerm);
+  }
+
+  console.log(i);
 }
 
-body {
-  font-family: "Roboto", "sans-serif";
-}
-
-.navbar {
-  width: 100%;
-  height: 70px;
-  background-color: white;
-  position: sticky;
-  top: 0;
-  z-index: 99;
-  color: black;
-}
-
-.logo {
-  font-size: 30px;
-  color: #4dbf00;
-  margin-left: 10px;
-  /* margin-top: 0px; */
-  font-family: "Sen", "sans-serif";
-  transition: all 1s ease-out;
-}
-.logo:hover {
-  transform: scale(0.9);
-  cursor: pointer;
-}
-
-.logo-image {
-  width: 45px;
-  height: 45px;
-  margin-left: 5px;
-  margin-top: 5px;
-  border-radius: 10px;
-  border: 1px solid whitesmoke;
-  /* transition-duration: 1s; */
-  transition: all 1s ease-out;
-}
-.logo-image:hover {
-  border: 1px solid rgb(36, 205, 101);
-  transform: scale(0.98);
-}
-.logo-image.active {
-  border: 1px solid black;
-}
-.menulistitema {
-  text-decoration: none;
-  color: black;
-  font-family: "Sen";
-  transition: all 0.6s ease-out;
-}
-.menu-list-item a:hover {
-  text-decoration: none;
-  color: rgb(202, 104, 29);
-  font-family: "Sen";
-  transform: scale(0.98);
-}
-/* the js dont work if the tag is written with spaces */
-
-.menulistitema.active {
-  color: white;
-}
-.menu-container ul li {
-  /* color: white; */
-  transition: all 0.6s ease-out;
-}
-.menu-container ul li:hover {
-  color: rgb(202, 104, 29);
-  transform: scale(0.98);
-}
-.menu-container ul li.active {
-  color: white;
-  /* text-decoration:dashed;  */
-}
-.navbar-container {
-  display: flex;
-  align-items: center;
-  padding: 0 50px;
-  height: 100%;
-  color: black;
-  font-family: "Sen";
-}
-.navbar-container.active {
-  color: rgb(255, 255, 255);
-  background-color: black;
-}
-
-.logo-container {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
-.menu-container {
-  flex: 6;
-}
-
-.menu-list {
-  display: flex;
-  list-style: none;
-  cursor: pointer;
-}
-
-.menu-list-item {
-  margin-right: 25px;
-  cursor: pointer;
-}
-.search-btn {
-  border-radius: 40%;
-}
-.glass {
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-  padding: 2px;
-  margin: 2px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-  transition: all 0.6s ease-out;
-}
-.glass:hover {
-  color: rgb(238, 176, 21);
-  opacity: 0.9;
-  rotate: 360deg;
-}
-.search{
-  border-width: 1.5px;
-  border-style: solid;
-  border-color: black;
-  border-radius: 50px;
-  font-family: "Sen";
-  padding: 5px 40px;
-  margin: 6px;
-}
-.profile-container {
-  flex: 2;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.profile-picture {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  border-color: white;
-  border-width: 1.2px;
-  transition: all 0.6s ease-out;
-}
-
-.profile-picture:hover {
-  border-color: #4dbf00;
-  transform: scale(1.06);
-}
-
-.profile-text-container {
-  margin: 0 20px;
-  font-size: 17px;
-  transition: all 0.5s ease-out;
-}
-.profile-text-container:hover {
-  color: rgb(202, 104, 29);
-  cursor: pointer;
-  transform: scale(0.98);
-}
-/* .sidebar {
-    width: 40px;
-    height: 100%;
-    background-color: black;
-    position: fixed;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 60px;
-  } */
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-  padding-top: 25px;
-  min-height: 80vh;
-  background-color: black;
-  color: white;
-}
-.container .box {
-  height: 300px;
-  margin: 0 30px;
-  transition: all 0.9s ease-out;
-}
-.container.active {
-  background-color: rgb(228, 228, 228);
-  color: black;
-}
-.container .box:hover {
-  height: 300px;
-  transform: scale(1.05);
-  margin: 0 30px;
-  opacity: 0.78;
-  cursor: pointer;
-}
-.container .box .moviesDetails {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-}
-.leftDetails {
-  font-family: "sofia", "sans-serif";
-  text-align: left;
-  width: 140px;
-  padding-left: 2px;
-}
-.leftDetails h5 {
-  font-size: 14px;
-  text-align: left;
-}
-.leftDetails p {
-  text-align: left;
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 0px;
-  padding-bottom: 0px;
-}
-
-.rightDetailsrating {
-  font-family: "sans-serif";
-  text-align: right;
-  padding-right: 0px;
-}
-
-.toggle {
-  width: 40px;
-  height: 20px;
-  background-color: black;
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  position: relative;
-}
-
-.toggle-icon {
-  color: rgb(238, 176, 21);
-}
-
-.toggle-ball {
-  width: 18px;
-  height: 18px;
-  background-color: white;
-  position: absolute;
-  right: 1px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 1s ease all;
-}
-.toggle.active {
-  background-color: white;
-}
-
-.toggle-ball.active {
-  background-color: black;
-  transform: translateX(-20px);
-}
-img {
-  height: 250px;
-  width: 180px;
-  border-radius: 50px 5px ;
-  border: 0.7px solid rgb(238, 176, 21);
-}
-
-footer {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  /* background-color: black; */
-}
-footer {
-  margin: 0 px;
-  font-size: 15px;
-  background-color: black;
-  color: white;
-}
-footer.active {
-  background-color: white;
-  color: black;
-}
-footer div ul {
-  display: flex;
-  flex-wrap: nowrap;
-  text-decoration: none;
-  color: white;
-
-  width: 100%;
-  padding: 0px 6px;
-}
-footer div ul li {
-  list-style: none;
-  margin: 0 7px;
-  font-family: "Times New Roman";
-}
-footer div ul li a {
-  text-decoration: none;
-  color: white;
-  transition: all 0.6s ease-out;
-}
-
-.ullia:hover {
-  color: rgb(238, 176, 21);
-}
-.ullia.active {
-  color: rgb(0, 0, 0);
-  text-emphasis-style: bold;
-}
-.ullia.active:hover {
-  color: rgb(184, 134, 7);
-}
-
-footer div ul.active {
-  color: black;
-}
-.arrow {
-  font-size: 30px;
-  color: lightgray;
-  opacity: 0.65;
-  border-radius: 10px;
-  cursor: pointer;
-  display: flex;
-  /* gap: 20px; */
-  justify-content: center;
-  transition: all 0.6s ease-out;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-}
-.arrow:hover {
-  color: rgb(238, 176, 21);
-  opacity: 0.9;
-  transform: translateY(3px);
-}
-.button {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  background-color: black;
-}
-.button.active {
-  background-color: white;
-}
-button:hover {
-  transform: scale(1.1);
-  cursor: pointer;
-}
-button {
-  padding: 3px 5px;
-  font-size: 20px;
-  background: rgb(138, 10, 202);
-  color: white;
-  border: black;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.4s ease-out;
-}
-
-/* @media (max-width: 800px) {
-    body {
-      background-color: rgb(8, 2, 36);
-      color: rgb(255, 255, 255);
-    }
-    header{
-        background: black;
-    }
-    header nav{
-        display: none;
-    }
-    .topHeader{
-        display: block;
-        margin-bottom: 10px;
-    }
-    .bottomHeader{
-        position: absolute;
-        position: absolute;
-        right: 50px;
-        top: 100px;
-    }
-    .bottomHeader ul{
-        display: block;
-        
-    }
-    .bottomHeader ul li{
-        color: rgb(255, 255, 255);
-    }
-    .bottomHeader ul li:hover{
-        color: blue;
-    }
-    .topHeader input[type = "search"]{
-        width: 50%;
-        border-radius: 5px;
-        border: none;
-        margin: 10px 0;
-    }
-    
-    img{
-        border: none;
-    }
-    footer{
-        display: flex;
-        flex-direction: column-reverse;
-    }
-    footer div ul li a{
-        color: white;
-    }
-    i{
-        visibility: visible;
-        position: absolute;
-        right: 12px;
-        top: 26px;
-        font-size: 26px;
-        height: 30px;
-        width: 30px;
-    }
-    .bg{
-        background: #000;
-        border-radius: 5px;
-        border: 1px solid white;
-        padding: 15px 10px;
-        
+function fetchData(url) {
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        i++;
+        const message = `An error has occured: ${response.status}`;
+        throw new Error(message);
+        console.log(Error(message));
       }
-      .show{
-          display: block;
-        }
-        .opacity{
-          opacity: 0.09;
-        }
-    }
+      return response.json();
+    })
+    .then((movies) => {
+      let container = document.querySelector(".container");
+      // console.log(movies.results[i].postser_path)
+      console.log(movies);
+      let myLen = movies.results.length;
+      showMovies();
 
-  @media (max-width: 570px){
-    footer div ul{
-    display: block;
-    }
-  } */
+      function showMovies() {
+        if (i == 1) {
+          container.innerHTML = " ";
+        }
+        for (var j = 0; j < myLen; j++) {
+          let movie = movies.results[j];
+          container.innerHTML += `<div class="box">
+      <img class="movieimg" src="http://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="img" />
+  <div class="moviesDetails">
+    <div class="leftDetails">
+      <h5>${movie.original_title}</h5>
+      <p>${movie.release_date}</p>
+    </div>
+    <div class="rightDetailsrating"><strong>${movie.vote_average}</strong></div>
+  </div>
+</div>`;
+        }
+      }
+    })
+    .catch((error) => {
+      error.message; // 'An error has occurred: 404'
+      console.log(error);
+    });
+}
+
+const ball = document.querySelector(".toggle-ball");
+const items = document.querySelectorAll(
+  ".ullia,footer,.footertext,.navbar-container,.menulistitema,.container,.button,.navbar-container,.toggle"
+);
+
+ball.addEventListener("click", () => {
+  items.forEach((item) => {
+    item.classList.toggle("active");
+  });
+  ball.classList.toggle("active");
+});
+ 
+let searchTerm;
+form.addEventListener("submit", (e) => {
+  i=1;
+  e.preventDefault();
+  searchTerm = search.value;
+  if (searchTerm) {
+      
+      condition="search";
+      i=1;
+      searchurl= `https://api.themoviedb.org/3/search/movie?&api_key=04a03760452fdabea07d13c24071c6e3&page=${i}&query=`;
+      fetchData(searchurl+searchTerm);
+    search.value = "";
+  }
+  if (!searchTerm){
+      condition="api"
+      i=1;
+      apiurl = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${i}`;
+      fetchData(apiurl);
+  }
+});
