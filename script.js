@@ -1,8 +1,8 @@
 let btn = document.querySelector("body");
-let api_key = "04a03760452fdabea07d13c24071c6e3";
+let api_key = "";
 let i = 1;
 let condition;
-let searchurl = `https://api.themoviedb.org/3/search/movie?&api_key=04a03760452fdabea07d13c24071c6e3&page=${i}&query=`;
+let searchurl = `https://api.themoviedb.org/3/search/movie?&api_key=api_key&page=${i}&query=`;
 apiurl = `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${i}`;
 
 fetchData(apiurl);
