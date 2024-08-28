@@ -1,5 +1,5 @@
 let btn = document.querySelector("body");
-let api_key = "";
+let api_key = "YOUR_API_KEY";
 let i = 1;
 let condition;
 let searchurl = `https://api.themoviedb.org/3/search/movie?&api_key=api_key&page=${i}&query=`;
